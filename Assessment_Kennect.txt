@@ -1,0 +1,405 @@
+
+7.1:
+
+FOR LOOP:
+
+implementation of For loop in sum of array elements by using java....
+
+public class SumOfArray {  
+    public static void main(String[] args) {  
+         
+        int [] a = new int [] {1, 2, 3, 4, 5};    
+        int sum = 0;  
+
+        for (int i = 0; i < a.length; i++) {  
+           sum = sum + a[i];  
+        }  
+        System.out.println("Sum of all the elements of an array: " + sum);  
+    }  
+----------------------------------------------------------------------------------------------------------------------
+
+WHILE LOOP:
+
+public class WhileLoop {  
+public static void main(String[] args) {  
+    int i=1;  
+    while(i<=10){  
+        System.out.println(i);  
+    i++;  
+    }  
+    }  
+    }
+---------------------------------------------------------------------------------------------------------------------
+
+Continue Statement:
+
+
+public class Continue {  
+public static void main(String[] args) {  
+    
+  for(int i=1;i<=10;i++){  
+        if(i==5){  
+        continue;
+        }  
+        System.out.println(i);  
+}  
+}  
+}
+---------------------------------------------------------------------------------------------------------------------
+
+IF statement:
+
+public class If {  
+public static void main(String[] args) {  
+     
+    int age=20;  
+     
+    if(age>18){  
+    System.out.print("Age is greater than 18");  
+ }  
+ }  
+ }
+
+--------------------------------------------------------------------------------------------------------------------- 
+  
+IF-Else Statement:
+
+public class IfElse {  
+public static void main(String[] args) {  
+     
+    int number=13;  
+     
+    if(number%2==0){  
+        System.out.println("even number");  
+    }else{  
+        System.out.println("odd number");  
+}  
+}  
+}
+---------------------------------------------------------------------------------------------------------------------
+
+SWITCH Statement:
+
+public class SwitchExample {  
+public static void main(String[] args) {  
+     
+    int number=20;  
+    
+    switch(number){  
+     
+    case 10: System.out.println("10");  
+    break;  
+    case 20: System.out.println("20");  
+    break;  
+    case 30: System.out.println("30");  
+    break;  
+      
+    default:System.out.println("Not in 10, 20 or 30");  
+    }  
+}  
+} 
+---------------------------------------------------------------------------------------------------------------------
+
+RECURSION:
+
+public class Recursion {  
+static void p(){  
+System.out.println("hello");  
+p();  
+
+}  
+  
+public static void main(String[] args) {  
+
+p();  
+
+}  
+}
+---------------------------------------------------------------------------------------------------------------------
+
+Binary Search Tree:
+
+public class BinarySearchTree {  
+  
+     
+    public static class Node{  
+        int data;  
+        Node left;  
+        Node right;  
+  
+        public Node(int data){  
+             
+            this.data = data;  
+            this.left = null;  
+            this.right = null;  
+        }  
+      }  
+  
+       
+      public Node root;  
+  
+      public BinarySearchTree(){  
+          root = null;  
+      }  
+  
+   
+      public void insert(int data) {  
+           
+          Node newNode = new Node(data);  
+  
+           
+          if(root == null){  
+              root = newNode;  
+              return;  
+            }  
+          else {  
+                
+              Node current = root, parent = null;  
+  
+              while(true) {  
+                 
+                  parent = current;  
+  
+                   
+                  if(data < current.data) {  
+                      current = current.left;  
+                      if(current == null) {  
+                          parent.left = newNode;  
+                          return;  
+                      }  
+                  }  
+                    
+                  else {  
+                      current = current.right;  
+                      if(current == null) {  
+                          parent.right = newNode;  
+                          return;  
+                      }  
+                  }  
+              }  
+          }  
+      }  
+  
+       
+      public Node minNode(Node root) {  
+          if (root.left != null)  
+              return minNode(root.left);  
+          else  
+              return root;  
+      }  
+  
+       
+      public Node deleteNode(Node node, int value) {  
+          if(node == null){  
+              return null;  
+           }  
+          else {  
+                
+              if(value < node.data)  
+                  node.left = deleteNode(node.left, value);  
+  
+             
+              else if(value > node.data)  
+                  node.right = deleteNode(node.right, value);  
+  
+           
+              else {  
+                   
+                  if(node.left == null && node.right == null)  
+                      node = null;  
+  
+                    
+                  else if(node.left == null) {  
+                      node = node.right;  
+                  }  
+  
+                  
+                  else if(node.right == null) {  
+                      node = node.left;  
+                  }  
+  
+                    
+                  else {  
+                       
+                      Node temp = minNode(node.right);  
+                      
+                      node.data = temp.data;  
+                       
+                      node.right = deleteNode(node.right, temp.data);  
+                  }  
+              }  
+              return node;  
+          }  
+      }  
+  
+       
+      public void inorderTraversal(Node node) {  
+  
+           
+          if(root == null){  
+              System.out.println("Tree is empty");  
+              return;  
+           }  
+          else {  
+  
+              if(node.left!= null)  
+                  inorderTraversal(node.left);  
+              System.out.print(node.data + " ");  
+              if(node.right!= null)  
+                  inorderTraversal(node.right);  
+  
+          }  
+      }  
+  
+      public static void main(String[] args) {  
+  
+          BinarySearchTree bt = new BinarySearchTree();  
+            
+          bt.insert(50);  
+          bt.insert(30);  
+          bt.insert(70);  
+          bt.insert(60);  
+          bt.insert(10);  
+          bt.insert(90);  
+  
+          System.out.println("Binary search tree after insertion:");  
+           
+          bt.inorderTraversal(bt.root);  
+  
+          Node deletedNode = null;  
+           
+          deletedNode = bt.deleteNode(bt.root, 90);  
+          System.out.println("\nBinary search tree after deleting node 90:");  
+          bt.inorderTraversal(bt.root);  
+  
+            
+          deletedNode = bt.deleteNode(bt.root, 30);  
+          System.out.println("\nBinary search tree after deleting node 30:");  
+          bt.inorderTraversal(bt.root);  
+  
+          
+          deletedNode = bt.deleteNode(bt.root, 50);  
+          System.out.println("\nBinary search tree after deleting node 50:");  
+          bt.inorderTraversal(bt.root);  
+      }  
+}  
+---------------------------------------------------------------------------------------------------------------------
+
+closure statement:
+
+package com.closure;  
+@FunctionalInterface  
+public interface Operation   
+{  
+void operate(int n);  
+}  
+ ClosureExample.java  
+package com.javatpoint;  
+public class ClosureExample  
+{  
+public static void main(String args[])  
+{  
+int x=20;  
+int y=90;  
+
+doSum(x, new Operation()  
+{  
+      
+@Override  
+public void operate(int n)  
+{     
+  
+System.out.println("Sum is: "+(n+y));  
+}  
+} 
+}  
+private static void doSum(int i, Operation op)  
+{  
+op.operate(i);  
+}  
+}     
+---------------------------------------------------------------------------------------------------------------------
+
+7.2:
+
+Implimentation of getelement by id:
+
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>A program on how getElementById works in JavaScript</title>
+</head>
+<body style="text-align: center ;">
+   <p> A program to define the usage of document.getElementById </p>
+   <p id="desc-docID">One of the most common methods in the HTML DOM is getElementById(). When you want to read or change an HTML element, you use document.getElementById().</p>
+   <p id="document-id" style="text-align : center"></p>
+   <script>
+      let content = document.getElementById('desc-docID').innerHTML;
+      document.getElementById('document-id').innerHTML = "The content inside the paragraph with id 'desc-docID' is : "+content;
+   </script>
+</body>
+</html>
+
+---------------------------------------------------------------------------------------------------------------------
+8.1:
+
+Check number is prime or not
+
+
+function p() {
+             
+            var n, i, flag = true;
+             
+            n = document.myform.n.value;
+            n = parseInt(n)
+            for(i = 2; i <= n - 1; i++)
+                if (n % i == 0) {
+                    flag = false;
+                    break;
+                }
+                 
+              
+            if (flag == true)
+                alert(n + " is prime");
+            else
+                alert(n + " is not prime");
+        }
+          
+function getDifference(n, i) {
+  if (a > b) {
+    return a - b;
+  }
+
+  return b - a;
+}
+
+----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
